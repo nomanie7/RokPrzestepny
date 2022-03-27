@@ -1,0 +1,20 @@
+﻿@page
+@model SavedInSessionModel
+@{
+ViewData["Title"] = "Data in session";
+}
+<p>Dane w zapisane w sesji</p>
+@if (Model.Person != null)
+{
+    @if (Model.Person.Year % 4 == 0)
+    {
+        <p>
+        @Html.DisplayFor(model => Model.Person.FirstName),
+        @Html.DisplayFor(model => Model.Person.Year) - rok przestępny</p>
+    }
+    else {
+        <p>
+        @Html.DisplayFor(model => Model.Person.FirstName), 
+        @Html.DisplayFor(model => Model.Person.Year) - rok nie przestępny</p>
+    }
+}
