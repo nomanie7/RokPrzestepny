@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using RokPrzestepny.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<PeopleContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PrzestepnyDB")));
 builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -9,6 +13,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true; 
     options.Cookie.IsEssential = true;
     });
+
 
 
 var app = builder.Build();

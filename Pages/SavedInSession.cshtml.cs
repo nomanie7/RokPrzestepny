@@ -3,22 +3,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using RokPrzestepny.Data;
 
 namespace RokPrzestepny.Pages
 {
     public class SavedInSessionModel : PageModel
     {
-        public Person Person { get; set; }
+        private readonly ILogger<IndexModel> _logger;
 
-        public IList<Person> people;
+        private readonly PeopleContext _context;
+        public SavedInSessionModel(ILogger<IndexModel> logger, PeopleContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
+
+        [BindProperty]
+        public Person Person { get; set; }
+        public IList<Person> People { get; set; }
 
         public void OnGet()
-         {
-            var Data = HttpContext.Session.GetString("Data");
-            if (Data != null)
-                Person = JsonConvert.DeserializeObject<Person>(Data);
-            }
-
+        {
+            People = _context.Person.ToList();
         }
     }
+}
 

@@ -4,17 +4,14 @@
 ViewData["Title"] = "Data in session";
 }
 <p>Dane w zapisane w sesji</p>
-@if (Model.Person != null)
+@foreach (var item in Model.People)
 {
-    @if (Model.Person.Year % 4 == 0)
-    {
-        <p>
-        @Html.DisplayFor(model => Model.Person.FirstName),
-        @Html.DisplayFor(model => Model.Person.Year) - rok przestępny</p>
-    }
-    else {
-        <p>
-        @Html.DisplayFor(model => Model.Person.FirstName), 
-        @Html.DisplayFor(model => Model.Person.Year) - rok nie przestępny</p>
-    }
+<p>
+@Html.DisplayFor(modelItem => item.Id),
+@Html.DisplayFor(modelItem => item.FirstName),
+@Html.DisplayFor(modelItem => item.LastName),
+@Html.DisplayFor(modelItem => item.Year),
+@Html.DisplayFor(modelItem => item.Date),
+@Html.DisplayFor(modelItem => item.Result)</p>
 }
+
